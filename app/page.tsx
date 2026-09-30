@@ -46,8 +46,7 @@ const company = {
   tagline: "POWERING PERFORMANCE. DELIVERING EXCELLENCE.",
   description:
     "Reliable engineering solutions for rotary and static equipment across power and process industries.",
-  email: "nr.turboservices@gmail.com",
-  additionalEmail: "nrpowerengineering@gmail.com",
+  email: "nrpowerengineering@gmail.com",
   phone: "+91 90004 16666",
   address:
     "30th Division Main Road, Sramika Nagar, Opposite Masjid, AK Nagar, SPSR Nellore District, Andhra Pradesh – 524004, India.",
@@ -1346,7 +1345,7 @@ export default function Home() {
 
                 <div className="mt-8 border-l-2 border-[#168bff] pl-5">
                   <div className="text-4xl font-black tracking-[-0.04em] text-[#10243e]">
-                    10?70 MW
+                    10&ndash;70 MW
                   </div>
 
                   <div className="mt-1 text-[9px] font-bold tracking-[0.2em] text-[#64748b]">
@@ -1851,7 +1850,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href={`mailto:${company.email}?cc=${company.additionalEmail}`}
+                  href={`mailto:${company.email}?cc=${company.email}`}
                   className="inline-flex h-[52px] items-center justify-center gap-3 border border-white/55 px-7 text-xs font-bold tracking-[0.12em] !text-[#e5f3ff] transition hover:bg-white/[0.05] hover:!text-white"
                 >
                   <Mail size={16} />
@@ -1918,10 +1917,10 @@ export default function Home() {
                     {company.email}
                   </a>
                   <a
-                    href={`mailto:${company.additionalEmail}`}
+                    href={`mailto:${company.email}`}
                     className="block break-all text-sm !text-[#e5f3ff] hover:!text-[#8fc7ff] transition"
                   >
-                    {company.additionalEmail}
+                    {company.email}
                   </a>
                 </div>
               </div>
@@ -1956,10 +1955,10 @@ export default function Home() {
               </a>
               <span className="text-white/20">|</span>
               <a
-                href={`mailto:${company.additionalEmail}`}
+                href={`mailto:${company.email}`}
                 className="hover:text-white transition"
               >
-                {company.additionalEmail}
+                {company.email}
               </a>
             </div>
 
