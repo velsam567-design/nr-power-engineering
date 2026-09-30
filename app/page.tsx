@@ -1850,7 +1850,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href={`mailto:${company.email}?cc=${company.email}`}
+                  href={`mailto:${company.email}`}
                   className="inline-flex h-[52px] items-center justify-center gap-3 border border-white/55 px-7 text-xs font-bold tracking-[0.12em] !text-[#e5f3ff] transition hover:bg-white/[0.05] hover:!text-white"
                 >
                   <Mail size={16} />
@@ -1916,12 +1916,6 @@ export default function Home() {
                   >
                     {company.email}
                   </a>
-                  <a
-                    href={`mailto:${company.email}`}
-                    className="block break-all text-sm !text-[#e5f3ff] hover:!text-[#8fc7ff] transition"
-                  >
-                    {company.email}
-                  </a>
                 </div>
               </div>
             </Reveal>
@@ -1947,13 +1941,6 @@ export default function Home() {
 
           <div className="flex flex-col gap-2 sm:items-end">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/60">
-              <a
-                href={`mailto:${company.email}`}
-                className="hover:text-white transition"
-              >
-                {company.email}
-              </a>
-              <span className="text-white/20">|</span>
               <a
                 href={`mailto:${company.email}`}
                 className="hover:text-white transition"
