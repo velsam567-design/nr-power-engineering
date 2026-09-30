@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   motion,
   useMotionValue,
@@ -46,6 +47,7 @@ const company = {
   description:
     "Reliable engineering solutions for rotary and static equipment across power and process industries.",
   email: "nr.turboservices@gmail.com",
+  additionalEmail: "nrpowerengineering@gmail.com",
   phone: "+91 90004 16666",
   address:
     "30th Division Main Road, Sramika Nagar, Opposite Masjid, AK Nagar, SPSR Nellore District, Andhra Pradesh – 524004, India.",
@@ -232,6 +234,11 @@ const industries = [
     title: "Waste to Energy",
     icon: Sparkles,
   },
+  {
+    number: "10",
+    title: "Sugar Industry",
+    icon: Factory,
+  },
 ];
 
 /* =========================================================
@@ -281,6 +288,7 @@ const equipment = [
   "Turbo Compressors",
   "Turbo Blowers",
   "Diesel Generator Sets",
+  "MG Sets (Motor & Generator Sets)",
   "High-Speed Centrifugal Compressors",
   "Pumps",
   "Gearboxes",
@@ -293,10 +301,10 @@ const equipment = [
 
 const serviceImages = [
   "/images/about/turbine-hall.jpg",
-  "/images/about/hydroelectric-inspection.jpg",
+  "/images/services/turbine-overhaul.jpg",
   "/images/services/industrial-welder.jpg",
   "/images/services/refinery-engineers.jpg",
-  "/images/expertise/turbine-generator.jpg",
+  "/images/expertise/steam-turbine-rotor.jpg",
   "/images/support/field-inspection.jpg",
   "/images/services/spare-component.jpg",
 ];
@@ -311,6 +319,7 @@ const industryImages = [
   "/images/industries/paper-mill.jpg",
   "/images/services/compressor.jpg",
   "/images/industries/waste-to-energy.jpg",
+  "/images/industries/sugar-industry.jpg",
 ];
 
 const valueImages = [
@@ -323,11 +332,12 @@ const valueImages = [
 ];
 
 const equipmentImages: Record<string, string> = {
-  "Steam Turbine Generator (STG) Systems": "/images/expertise/turbine-generator.jpg",
+  "Steam Turbine Generator (STG) Systems": "/images/expertise/steam-turbine-rotor.jpg",
   "Turbo Generators": "/images/expertise/turbine-generator.jpg",
   "Turbo Compressors": "/images/services/compressor.jpg",
   "Turbo Blowers": "/images/services/compressor.jpg",
   "Diesel Generator Sets": "/images/about/turbine-hall.jpg",
+  "MG Sets (Motor & Generator Sets)": "/images/expertise/turbine-generator.jpg",
   "High-Speed Centrifugal Compressors": "/images/services/compressor.jpg",
   Pumps: "/images/services/compressor.jpg",
   Gearboxes: "/images/expertise/gearbox.jpg",
@@ -335,7 +345,7 @@ const equipmentImages: Record<string, string> = {
   "Heat Exchangers": "/images/services/refinery-engineers.jpg",
   Condensers: "/images/about/turbine-hall.jpg",
   "Lubrication Systems": "/images/services/refinery-engineers.jpg",
-  "Auxiliary Equipment": "/images/expertise/turbine-generator.jpg",
+  "Auxiliary Equipment": "/images/services/turbine-overhaul.jpg",
 };
 
 function DecorativeImage({
@@ -389,7 +399,7 @@ function AboutParallaxImage() {
         style={{ y: reduceMotion || isNarrow ? 0 : y }}
       >
         <DecorativeImage
-          src="/images/about/hydroelectric-inspection.jpg"
+          src="/images/services/turbine-overhaul.jpg"
           sizes="(min-width: 1024px) 30vw, 100vw"
           className="scale-105 object-[center_42%]"
         />
@@ -598,7 +608,7 @@ export default function Home() {
           >
             {/* LOGO */}
 
-            <a
+            <Link
               href="/"
               className="flex items-center gap-3"
             >
@@ -619,7 +629,7 @@ export default function Home() {
                   ENGINEERING SERVICES
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* DESKTOP MENU */}
 
@@ -1268,6 +1278,88 @@ export default function Home() {
       =================================================== */}
 
       <section
+        id="founder"
+        className="relative overflow-hidden bg-[#f5f8fc] py-24 lg:py-32"
+      >
+        <div className="container-nr">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <Reveal direction="left">
+              <div className="relative overflow-hidden bg-[#06182c]">
+                <Image
+                  src="/images/founder/rahamathulla-turbine.png"
+                  alt="Rahamathulla - Founder, NR Power Engineering Services"
+                  width={900}
+                  height={1100}
+                  className="h-auto w-full object-cover"
+                  loading="lazy"
+                />
+
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#06182c] via-[#06182c]/40 to-transparent p-6 pt-24">
+                  <div className="text-[10px] font-bold tracking-[0.25em] text-[#168bff]">
+                    FOUNDER
+                  </div>
+
+                  <div className="mt-2 text-2xl font-black tracking-tight text-white">
+                    Rahamathulla
+                  </div>
+
+                  <div className="mt-1 text-sm text-white/60">
+                    NR Power Engineering Services
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal direction="right">
+              <div>
+                <div className="mb-5 text-[10px] font-bold tracking-[0.28em] text-[#0879e8]">
+                  FOUNDER &amp; ENGINEERING EXPERIENCE
+                </div>
+
+                <h2 className="max-w-2xl text-4xl font-black tracking-[-0.04em] text-[#10243e] sm:text-5xl">
+                  Engineering experience built around
+                  <span className="text-[#0879e8]"> critical equipment.</span>
+                </h2>
+
+                <p className="mt-6 max-w-2xl text-base leading-8 text-[#64748b]">
+                  Rahamathulla brings hands-on experience in the erection,
+                  commissioning, operation, maintenance, troubleshooting,
+                  repair and overhauling of rotary equipment for captive and
+                  utility power plants across India.
+                </p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {[
+                    "Steam Turbine Generator Systems",
+                    "Turbo Compressors",
+                    "Turbo Blowers",
+                    "Pumps & Gearboxes",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="border border-[#dbe5ef] bg-white px-5 py-4 text-sm font-semibold text-[#10243e]"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 border-l-2 border-[#168bff] pl-5">
+                  <div className="text-4xl font-black tracking-[-0.04em] text-[#10243e]">
+                    10?70 MW
+                  </div>
+
+                  <div className="mt-1 text-[9px] font-bold tracking-[0.2em] text-[#64748b]">
+                    PROJECT EXPERIENCE
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section
         id="expertise"
         className="section-padding relative overflow-hidden bg-[#06182c]"
       >
@@ -1759,7 +1851,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href="mailto:nr.turboservices@gmail.com"
+                  href={`mailto:${company.email}?cc=${company.additionalEmail}`}
                   className="inline-flex h-[52px] items-center justify-center gap-3 border border-white/55 px-7 text-xs font-bold tracking-[0.12em] !text-[#e5f3ff] transition hover:bg-white/[0.05] hover:!text-white"
                 >
                   <Mail size={16} />
@@ -1818,12 +1910,20 @@ export default function Home() {
                   EMAIL
                 </div>
 
-                <a
-                  href={`mailto:${company.email}`}
-                  className="mt-3 block break-all text-sm !text-[#e5f3ff] hover:!text-[#8fc7ff]"
-                >
-                  {company.email}
-                </a>
+                <div className="mt-3 space-y-1.5">
+                  <a
+                    href={`mailto:${company.email}`}
+                    className="block break-all text-sm !text-[#e5f3ff] hover:!text-[#8fc7ff] transition"
+                  >
+                    {company.email}
+                  </a>
+                  <a
+                    href={`mailto:${company.additionalEmail}`}
+                    className="block break-all text-sm !text-[#e5f3ff] hover:!text-[#8fc7ff] transition"
+                  >
+                    {company.additionalEmail}
+                  </a>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -1846,8 +1946,26 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-[9px] tracking-[0.12em] text-white/30">
-            © 2026 NR POWER ENGINEERING SERVICES
+          <div className="flex flex-col gap-2 sm:items-end">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/60">
+              <a
+                href={`mailto:${company.email}`}
+                className="hover:text-white transition"
+              >
+                {company.email}
+              </a>
+              <span className="text-white/20">|</span>
+              <a
+                href={`mailto:${company.additionalEmail}`}
+                className="hover:text-white transition"
+              >
+                {company.additionalEmail}
+              </a>
+            </div>
+
+            <div className="text-[9px] tracking-[0.12em] text-white/30">
+              © 2026 NR POWER ENGINEERING SERVICES
+            </div>
           </div>
         </div>
       </footer>

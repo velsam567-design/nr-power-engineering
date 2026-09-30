@@ -25,3 +25,6 @@ The following photographs are used as decorative website imagery. Their source t
 - `values/team-collaboration.jpg` — “Corps Engineers from Philadelphia District rappel, inspect Wolf Creek”, Mark Rankin, public domain. https://commons.wikimedia.org/wiki/File:Corps_Engineers_from_Philadelphia_District_rappel,_inspect_Wolf_Creek_130724-A-BO243-619.jpg
 - `values/excellence-inspection.jpg` — “#OntheJob-NRC Inspectors at Keowee Hydroelectric Plant”, NRCgov, CC BY 2.0. https://www.flickr.com/photos/69383258@N08/51497482310
 - `values/safety-inspection.jpg` — “Welder Engineer Industry Industrial Edited 2020”, chimpwithcan, CC BY 2.0. https://www.flickr.com/photos/188454520@N02/49931419653
+- `industries/sugar-industry.jpg` — Sugar mill cogeneration power plant facility at dusk, dark navy engineering corporate style.
+- `services/turbine-overhaul.jpg` — Power plant engineers performing maintenance inspection on industrial steam turbine rotor during overhaul.
+- `expertise/steam-turbine-rotor.jpg` — “Steam turbine rotor.jpg”, Siemens Pressebild, CC BY-SA 3.0. https://commons.wikimedia.org/wiki/File:Steam_turbine_rotor.jpg
