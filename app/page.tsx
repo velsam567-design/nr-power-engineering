@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -34,7 +35,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /* =========================================================
    COMPANY DATA
@@ -524,6 +525,382 @@ function SectionHeading({
         </p>
       )}
     </div>
+  );
+}
+
+/* =========================================================
+   PROPRIETOR PROFILE
+========================================================= */
+
+const proprietorKeyExpertise = [
+  "Steam Turbine & Generator (STG)",
+  "Turbine Commissioning",
+  "Turbine Servicing & Overhauling",
+  "Gearbox Erection & Alignment",
+  "Generator Inspection & Maintenance",
+  "Power Plant Mechanical Maintenance",
+];
+
+const proprietorFullExpertise = [
+  "Steam Turbine & Generator (STG) Erection & Installation",
+  "Turbine & Generator Commissioning",
+  "Turbine Servicing, Overhauling & Maintenance",
+  "Gearbox Erection, Alignment & Servicing",
+  "Turbine–Gearbox–Generator Alignment",
+  "Generator Inspection & Maintenance",
+  "Power Plant Mechanical Maintenance",
+  "Shutdown & Overhauling Activities",
+  "Field Engineering & Project Execution",
+  "Manpower Coordination & Site Supervision",
+  "Power Plant Equipment Servicing & Troubleshooting",
+];
+
+function ProprietorProfile() {
+  const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const openButtonRef = useRef<HTMLButtonElement>(null);
+
+  const openPanel = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const closePanel = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  // Focus management & scroll lock
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+      // Delay focus to after animation starts
+      const t = window.setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 80);
+      return () => {
+        window.clearTimeout(t);
+        document.body.style.overflow = "";
+      };
+    } else {
+      document.body.style.overflow = "";
+      openButtonRef.current?.focus();
+    }
+  }, [open]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closePanel();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [open, closePanel]);
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const panelVariants = {
+    hidden: { opacity: 0, y: reduced ? 0 : 40 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: reduced ? 0 : 30 },
+  };
+
+  return (
+    <section
+      id="founder"
+      className="relative overflow-hidden bg-[#f5f8fc] py-24 lg:py-32"
+    >
+      <div className="container-nr">
+        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          {/* IMAGE COLUMN */}
+          <Reveal direction="left">
+            <div className="relative overflow-hidden bg-[#06182c]">
+              <Image
+                src="/images/founder/rahamathulla-turbine.png"
+                alt="SK. Rahamthulla – Proprietor, NR Power Engineering Services"
+                width={900}
+                height={1100}
+                className="h-auto w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#06182c] via-[#06182c]/40 to-transparent p-6 pt-24">
+                <div className="text-[10px] font-bold tracking-[0.25em] text-[#168bff]">
+                  PROPRIETOR
+                </div>
+                <div className="mt-2 text-2xl font-black tracking-tight text-white">
+                  SK. Rahamthulla
+                </div>
+                <div className="mt-1 text-sm text-white/60">
+                  NR Power Engineering Services
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* CONTENT COLUMN */}
+          <Reveal direction="right">
+            <div>
+              {/* EYEBROW */}
+              <div className="mb-5 text-[10px] font-bold tracking-[0.28em] text-[#0879e8]">
+                PROPRIETOR PROFILE
+              </div>
+
+              {/* NAME & DESIGNATION */}
+              <h2 className="text-4xl font-black tracking-[-0.04em] text-[#10243e] sm:text-5xl">
+                SK. Rahamthulla
+              </h2>
+              <div className="mt-2 text-sm font-semibold tracking-wide text-[#64748b]">
+                Proprietor – NR Power Engineering Services
+              </div>
+              <div className="mt-1 text-[11px] font-bold tracking-[0.18em] text-[#0879e8]">
+                Erection · Commissioning · Servicing · Maintenance
+              </div>
+
+              {/* INTRODUCTION */}
+              <p className="mt-6 max-w-xl text-[15px] leading-8 text-[#475569]">
+                SK. Rahamthulla is a Power &amp; Engineering professional with{" "}
+                <strong className="font-bold text-[#10243e]">
+                  15+ years of hands-on experience
+                </strong>{" "}
+                in power plant projects, specializing in Steam Turbine &amp;
+                Generator (STG) erection, commissioning, servicing,
+                maintenance, and project execution.
+              </p>
+
+              {/* KEY EXPERTISE */}
+              <div className="mt-8">
+                <div className="mb-4 text-[9px] font-bold tracking-[0.22em] text-[#64748b]">
+                  KEY EXPERTISE
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {proprietorKeyExpertise.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-2.5 border border-[#dbe5ef] bg-white px-4 py-3 text-[12px] font-semibold leading-5 text-[#10243e]"
+                    >
+                      <CheckCircle2
+                        size={13}
+                        className="mt-0.5 shrink-0 text-[#0879e8]"
+                      />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA BUTTON */}
+              <div className="mt-10">
+                <button
+                  ref={openButtonRef}
+                  type="button"
+                  onClick={openPanel}
+                  aria-expanded={open}
+                  aria-controls="proprietor-full-profile"
+                  className="group inline-flex h-[50px] items-center gap-3 border border-[#0879e8] bg-[#0879e8] px-7 text-[10px] font-extrabold tracking-[0.16em] text-white shadow-[0_8px_24px_rgba(8,121,232,0.25)] transition-all duration-200 hover:bg-[#168bff] hover:shadow-[0_12px_32px_rgba(8,121,232,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0879e8]"
+                >
+                  MORE ABOUT RAHAMTHULLA
+                  <ArrowRight
+                    size={14}
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                  />
+                </button>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* FULL PROFILE OVERLAY */}
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* BACKDROP */}
+            <motion.div
+              key="proprietor-backdrop"
+              variants={overlayVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              transition={{ duration: reduced ? 0 : 0.25 }}
+              className="fixed inset-0 z-[60] bg-[#06182c]/80 backdrop-blur-[6px]"
+              aria-hidden="true"
+              onClick={closePanel}
+            />
+
+            {/* PANEL */}
+            <motion.div
+              key="proprietor-panel"
+              id="proprietor-full-profile"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Full profile of SK. Rahamthulla"
+              variants={panelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{
+                duration: reduced ? 0 : 0.42,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="fixed inset-x-0 bottom-0 z-[70] flex max-h-[92dvh] flex-col overflow-hidden bg-white shadow-[0_-24px_80px_rgba(6,24,44,0.3)] sm:inset-4 sm:inset-x-auto sm:left-1/2 sm:max-h-[90dvh] sm:w-full sm:max-w-3xl sm:-translate-x-1/2 sm:rounded-none lg:inset-x-auto lg:left-1/2 lg:max-w-4xl lg:-translate-x-1/2"
+            >
+              {/* PANEL HEADER */}
+              <div className="flex shrink-0 items-center justify-between border-b border-slate-200 bg-[#06182c] px-6 py-5 sm:px-8">
+                <div>
+                  <div className="text-[9px] font-bold tracking-[0.26em] text-[#5eb0ff]">
+                    PROFESSIONAL PROFILE
+                  </div>
+                  <div className="mt-1 text-lg font-black tracking-tight text-white">
+                    SK. Rahamthulla
+                  </div>
+                </div>
+                <button
+                  ref={closeButtonRef}
+                  type="button"
+                  onClick={closePanel}
+                  aria-label="Close profile"
+                  className="flex h-9 w-9 items-center justify-center border border-white/25 text-white/70 transition hover:border-white/50 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* PANEL SCROLLABLE BODY */}
+              <div className="flex-1 overflow-y-auto overscroll-contain">
+                <div className="grid lg:grid-cols-[300px_1fr]">
+                  {/* LEFT: IMAGE + IDENTITY */}
+                  <div className="relative shrink-0 bg-[#06182c]">
+                    <div className="relative aspect-[3/4] w-full lg:aspect-auto lg:h-full lg:min-h-[520px]">
+                      <Image
+                        src="/images/founder/rahamathulla-turbine.png"
+                        alt="SK. Rahamthulla – Proprietor, NR Power Engineering Services"
+                        fill
+                        sizes="(min-width: 1024px) 300px, 100vw"
+                        className="object-cover object-top"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#06182c]/95 via-[#06182c]/40 to-transparent p-6 pt-20">
+                        <div className="text-[10px] font-bold tracking-[0.25em] text-[#168bff]">
+                          PROPRIETOR
+                        </div>
+                        <div className="mt-1.5 text-xl font-black tracking-tight text-white">
+                          SK. Rahamthulla
+                        </div>
+                        <div className="mt-1 text-xs text-white/55">
+                          NR Power Engineering Services
+                        </div>
+                        <div className="mt-3 text-[10px] font-bold tracking-[0.15em] text-[#5eb0ff]">
+                          15+ Years Experience
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RIGHT: CONTENT */}
+                  <div className="space-y-8 p-6 sm:p-8">
+                    {/* PROFESSIONAL SUMMARY */}
+                    <div>
+                      <div className="mb-3 text-[9px] font-bold tracking-[0.24em] text-[#0879e8]">
+                        PROFESSIONAL PROFILE
+                      </div>
+                      <div className="space-y-4 text-sm leading-8 text-[#475569]">
+                        <p>
+                          SK. Rahamthulla is a Power &amp; Engineering
+                          professional with{" "}
+                          <strong className="font-semibold text-[#10243e]">
+                            15+ years of hands-on experience
+                          </strong>{" "}
+                          in power plant projects, specializing in Steam
+                          Turbine &amp; Generator (STG) erection, installation,
+                          commissioning, servicing, overhauling, maintenance,
+                          and project execution.
+                        </p>
+                        <p>
+                          He has 15 years of professional experience associated
+                          with{" "}
+                          <strong className="font-semibold text-[#10243e]">
+                            Greene Sol Power Systems Pvt. Ltd.
+                          </strong>
+                          , gaining extensive field experience in power plant
+                          equipment erection, commissioning, servicing,
+                          maintenance, shutdown, and overhauling activities.
+                        </p>
+                        <p>
+                          His expertise covers Steam Turbines, Generators,
+                          Gearboxes, and associated auxiliary systems, with
+                          strong experience in mechanical erection, alignment,
+                          inspection, troubleshooting, site supervision,
+                          manpower coordination, and project execution.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* DIVIDER */}
+                    <div className="h-px bg-slate-200" />
+
+                    {/* KEY AREAS OF EXPERTISE */}
+                    <div>
+                      <div className="mb-4 text-[9px] font-bold tracking-[0.24em] text-[#0879e8]">
+                        KEY AREAS OF EXPERTISE
+                      </div>
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {proprietorFullExpertise.map((item, idx) => (
+                          <div
+                            key={item}
+                            className="flex items-start gap-3 border border-[#dbe5ef] bg-[#f8fbff] px-4 py-3"
+                          >
+                            <span className="mt-0.5 shrink-0 text-[9px] font-bold tracking-[0.1em] text-[#0879e8]">
+                              {String(idx + 1).padStart(2, "0")}
+                            </span>
+                            <span className="text-[12px] font-semibold leading-5 text-[#10243e]">
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* DIVIDER */}
+                    <div className="h-px bg-slate-200" />
+
+                    {/* PROFESSIONAL STRENGTH */}
+                    <div>
+                      <div className="mb-3 text-[9px] font-bold tracking-[0.24em] text-[#0879e8]">
+                        PROFESSIONAL STRENGTH
+                      </div>
+                      <div className="border-l-2 border-[#168bff] pl-5">
+                        <p className="text-sm leading-8 text-[#475569]">
+                          Strong practical field experience with a focus on{" "}
+                          <strong className="font-semibold text-[#10243e]">
+                            safe execution, quality workmanship, technical
+                            coordination, efficient site management
+                          </strong>
+                          , and timely completion of power plant projects.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* BOTTOM CLOSE */}
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={closePanel}
+                        className="inline-flex h-[44px] items-center gap-2 border border-slate-300 bg-white px-6 text-[10px] font-bold tracking-[0.14em] text-[#10243e] transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0879e8]"
+                      >
+                        <X size={13} />
+                        CLOSE PROFILE
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }
 
@@ -1273,90 +1650,10 @@ export default function Home() {
       </section>
 
       {/* ===================================================
-          EXPERTISE
+          PROPRIETOR PROFILE
       =================================================== */}
 
-      <section
-        id="founder"
-        className="relative overflow-hidden bg-[#f5f8fc] py-24 lg:py-32"
-      >
-        <div className="container-nr">
-          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-            <Reveal direction="left">
-              <div className="relative overflow-hidden bg-[#06182c]">
-                <Image
-                  src="/images/founder/rahamathulla-turbine.png"
-                  alt="Rahamathulla - Founder, NR Power Engineering Services"
-                  width={900}
-                  height={1100}
-                  className="h-auto w-full object-cover"
-                  loading="lazy"
-                />
-
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#06182c] via-[#06182c]/40 to-transparent p-6 pt-24">
-                  <div className="text-[10px] font-bold tracking-[0.25em] text-[#168bff]">
-                    FOUNDER
-                  </div>
-
-                  <div className="mt-2 text-2xl font-black tracking-tight text-white">
-                    Rahamathulla
-                  </div>
-
-                  <div className="mt-1 text-sm text-white/60">
-                    NR Power Engineering Services
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal direction="right">
-              <div>
-                <div className="mb-5 text-[10px] font-bold tracking-[0.28em] text-[#0879e8]">
-                  FOUNDER &amp; ENGINEERING EXPERIENCE
-                </div>
-
-                <h2 className="max-w-2xl text-4xl font-black tracking-[-0.04em] text-[#10243e] sm:text-5xl">
-                  Engineering experience built around
-                  <span className="text-[#0879e8]"> critical equipment.</span>
-                </h2>
-
-                <p className="mt-6 max-w-2xl text-base leading-8 text-[#64748b]">
-                  Rahamathulla brings hands-on experience in the erection,
-                  commissioning, operation, maintenance, troubleshooting,
-                  repair and overhauling of rotary equipment for captive and
-                  utility power plants across India.
-                </p>
-
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {[
-                    "Steam Turbine Generator Systems",
-                    "Turbo Compressors",
-                    "Turbo Blowers",
-                    "Pumps & Gearboxes",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="border border-[#dbe5ef] bg-white px-5 py-4 text-sm font-semibold text-[#10243e]"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 border-l-2 border-[#168bff] pl-5">
-                  <div className="text-4xl font-black tracking-[-0.04em] text-[#10243e]">
-                    10&ndash;70 MW
-                  </div>
-
-                  <div className="mt-1 text-[9px] font-bold tracking-[0.2em] text-[#64748b]">
-                    PROJECT EXPERIENCE
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <ProprietorProfile />
 
       <section
         id="expertise"
