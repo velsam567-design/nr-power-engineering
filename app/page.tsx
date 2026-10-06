@@ -911,8 +911,21 @@ function ProprietorProfile() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerSolid, setHeaderSolid] = useState(false);
+  const [isMobileLogo, setIsMobileLogo] = useState(false);
 
   const reduced = useReducedMotion();
+
+  useEffect(() => {
+    const viewportQuery = window.matchMedia("(max-width: 767px)");
+    const updateViewport = () => setIsMobileLogo(viewportQuery.matches);
+
+    updateViewport();
+    viewportQuery.addEventListener("change", updateViewport);
+
+    return () => {
+      viewportQuery.removeEventListener("change", updateViewport);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -986,25 +999,99 @@ export default function Home() {
 
             <Link
               href="/"
-              className="flex items-center gap-3"
+              className="flex items-center"
             >
-              <div className="relative flex h-11 w-11 items-center justify-center border border-white/45 bg-[#06182c]/85">
-                <span className="text-sm font-black tracking-[-0.08em] text-white">
-                  NR
-                </span>
-
-                <span className="absolute bottom-0 left-0 h-[2px] w-5 bg-[#168bff]" />
-              </div>
-
-              <div>
-                <div className="text-sm font-black tracking-[0.2em] text-white">
-                  NR POWER
+              <motion.div
+                whileHover={reduced ? undefined : { scale: 1.02 }}
+                transition={{ duration: 0.28, ease: "easeOut" }}
+                className="group inline-flex items-center gap-2.5 sm:gap-3"
+              >
+                <motion.div
+                  initial={false}
+                  animate={
+                    reduced
+                      ? { rotate: 0, y: 0, scale: 1 }
+                      : {
+                          rotate: 360,
+                          y: isMobileLogo ? [0, 2.5, 0, -2.5, 0] : [0, 5, 0, -5, 0],
+                          scale: isMobileLogo
+                            ? [0.98, 1.03, 0.98]
+                            : [0.96, 1.05, 0.96],
+                        }
+                  }
+                  transition={
+                    reduced
+                      ? { duration: 0 }
+                      : {
+                          rotate: {
+                            duration: 8,
+                            ease: "linear",
+                            repeat: Infinity,
+                            repeatType: "loop",
+                          },
+                          y: {
+                            duration: 4.2,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "loop",
+                          },
+                          scale: {
+                            duration: 3.8,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "loop",
+                          },
+                        }
+                  }
+                  className="relative inline-flex"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute -inset-[5px] rounded-full"
+                    style={{
+                      background:
+                        "radial-gradient(circle, rgba(195, 222, 255, 0.16) 0%, rgba(63, 137, 218, 0.1) 58%, rgba(6, 24, 44, 0) 78%)",
+                    }}
+                  />
+                  <Image
+                    src="/images/logo/nr-power-engineering-logo-transparent.png"
+                    alt="NR Power Engineering Services"
+                    width={180}
+                    height={180}
+                    className="relative z-10 h-[58px] w-[58px] object-contain md:h-[76px] md:w-[76px]"
+                    style={{
+                      filter:
+                        "brightness(1.1) contrast(1.05) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.28))",
+                    }}
+                  />
+                </motion.div>
+                <div className="flex min-w-0 flex-col justify-center whitespace-nowrap">
+                  <motion.span
+                    initial={reduced ? false : { opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: reduced ? 0 : 0.1,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="text-[11px] font-extrabold tracking-[0.18em] text-white/95 transition-colors duration-300 group-hover:text-white sm:text-sm"
+                  >
+                    NR POWER
+                  </motion.span>
+                  <motion.span
+                    initial={reduced ? false : { opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: reduced ? 0 : 0.22,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="mt-1 text-[6px] font-bold tracking-[0.22em] text-white/65 transition-colors duration-300 group-hover:text-white/85 sm:text-[8px] sm:tracking-[0.24em]"
+                  >
+                    ENGINEERING SERVICES
+                  </motion.span>
                 </div>
-
-                <div className="mt-1 text-[7px] font-bold tracking-[0.25em] text-white/60">
-                  ENGINEERING SERVICES
-                </div>
-              </div>
+              </motion.div>
             </Link>
 
             {/* DESKTOP MENU */}
