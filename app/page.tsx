@@ -911,21 +911,8 @@ function ProprietorProfile() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerSolid, setHeaderSolid] = useState(false);
-  const [isMobileLogo, setIsMobileLogo] = useState(false);
 
   const reduced = useReducedMotion();
-
-  useEffect(() => {
-    const viewportQuery = window.matchMedia("(max-width: 767px)");
-    const updateViewport = () => setIsMobileLogo(viewportQuery.matches);
-
-    updateViewport();
-    viewportQuery.addEventListener("change", updateViewport);
-
-    return () => {
-      viewportQuery.removeEventListener("change", updateViewport);
-    };
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -999,58 +986,41 @@ export default function Home() {
 
             <Link
               href="/"
-              className="flex items-center"
+              className="flex min-w-0 items-center"
             >
-              <motion.div
-                whileHover={reduced ? undefined : { scale: 1.02 }}
-                transition={{ duration: 0.28, ease: "easeOut" }}
-                className="group inline-flex items-center gap-2.5 sm:gap-3"
-              >
+              <div className="group inline-flex min-w-0 items-center gap-2 sm:gap-3">
                 <motion.div
-                  initial={false}
-                  animate={
-                    reduced
-                      ? { rotate: 0, y: 0, scale: 1 }
-                      : {
-                          rotate: 360,
-                          y: isMobileLogo ? [0, 2.5, 0, -2.5, 0] : [0, 5, 0, -5, 0],
-                          scale: isMobileLogo
-                            ? [0.98, 1.03, 0.98]
-                            : [0.96, 1.05, 0.96],
-                        }
-                  }
+                  animate={reduced ? undefined : { scale: [1, 1.03, 1] }}
                   transition={
                     reduced
-                      ? { duration: 0 }
+                      ? undefined
                       : {
-                          rotate: {
-                            duration: 8,
-                            ease: "linear",
-                            repeat: Infinity,
-                            repeatType: "loop",
-                          },
-                          y: {
-                            duration: 4.2,
-                            ease: "easeInOut",
-                            repeat: Infinity,
-                            repeatType: "loop",
-                          },
-                          scale: {
-                            duration: 3.8,
-                            ease: "easeInOut",
-                            repeat: Infinity,
-                            repeatType: "loop",
-                          },
+                          duration: 7,
+                          ease: "easeInOut",
+                          repeat: Infinity,
                         }
                   }
-                  className="relative inline-flex"
+                  className="relative isolate flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.2)] md:h-[78px] md:w-[78px]"
                 >
-                  <span
+                  <motion.span
                     aria-hidden="true"
-                    className="absolute -inset-[5px] rounded-full"
+                    animate={reduced ? undefined : { rotate: 360 }}
+                    transition={
+                      reduced
+                        ? undefined
+                        : {
+                            duration: 14,
+                            ease: "linear",
+                            repeat: Infinity,
+                          }
+                    }
+                    className="pointer-events-none absolute -inset-[3px] rounded-full opacity-75"
                     style={{
                       background:
-                        "radial-gradient(circle, rgba(195, 222, 255, 0.16) 0%, rgba(63, 137, 218, 0.1) 58%, rgba(6, 24, 44, 0) 78%)",
+                        "conic-gradient(from 0deg, transparent 0deg, transparent 292deg, rgba(118, 178, 235, 0.12) 316deg, rgba(226, 241, 255, 0.82) 338deg, transparent 360deg)",
+                      mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px))",
+                      WebkitMask:
+                        "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px))",
                     }}
                   />
                   <Image
@@ -1058,40 +1028,36 @@ export default function Home() {
                     alt="NR Power Engineering Services"
                     width={180}
                     height={180}
-                    className="relative z-10 h-[58px] w-[58px] object-contain md:h-[76px] md:w-[76px]"
-                    style={{
-                      filter:
-                        "brightness(1.1) contrast(1.05) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.28))",
-                    }}
+                    className="relative z-10 h-[52px] w-[52px] object-contain md:h-[70px] md:w-[70px]"
                   />
                 </motion.div>
                 <div className="flex min-w-0 flex-col justify-center whitespace-nowrap">
                   <motion.span
-                    initial={reduced ? false : { opacity: 0, x: -12 }}
+                    initial={reduced ? false : { opacity: 0, x: -5 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
-                      duration: 0.8,
+                      duration: 0.65,
                       delay: reduced ? 0 : 0.1,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="text-[11px] font-extrabold tracking-[0.18em] text-white/95 transition-colors duration-300 group-hover:text-white sm:text-sm"
+                    className="text-[10px] font-extrabold tracking-[0.14em] text-white/95 transition-colors duration-300 group-hover:text-white sm:text-sm sm:tracking-[0.18em]"
                   >
                     NR POWER
                   </motion.span>
                   <motion.span
-                    initial={reduced ? false : { opacity: 0, x: -8 }}
+                    initial={reduced ? false : { opacity: 0, x: -4 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
-                      duration: 0.8,
-                      delay: reduced ? 0 : 0.22,
+                      duration: 0.65,
+                      delay: reduced ? 0 : 0.16,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="mt-1 text-[6px] font-bold tracking-[0.22em] text-white/65 transition-colors duration-300 group-hover:text-white/85 sm:text-[8px] sm:tracking-[0.24em]"
+                    className="mt-1 text-[8px] font-bold tracking-[0.08em] text-white/75 transition-colors duration-300 group-hover:text-white/90 sm:tracking-[0.24em]"
                   >
                     ENGINEERING SERVICES
                   </motion.span>
                 </div>
-              </motion.div>
+              </div>
             </Link>
 
             {/* DESKTOP MENU */}
