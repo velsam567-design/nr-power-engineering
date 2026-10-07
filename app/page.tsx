@@ -1000,7 +1000,7 @@ export default function Home() {
                           repeat: Infinity,
                         }
                   }
-                  className="relative isolate flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.2)] md:h-[78px] md:w-[78px]"
+                  className="relative isolate h-14 w-14 shrink-0 md:h-[76px] md:w-[76px]"
                 >
                   <motion.span
                     aria-hidden="true"
@@ -1014,7 +1014,7 @@ export default function Home() {
                             repeat: Infinity,
                           }
                     }
-                    className="pointer-events-none absolute -inset-[3px] rounded-full opacity-75"
+                    className="pointer-events-none absolute -inset-[3px] z-20 rounded-full opacity-75"
                     style={{
                       background:
                         "conic-gradient(from 0deg, transparent 0deg, transparent 292deg, rgba(118, 178, 235, 0.12) 316deg, rgba(226, 241, 255, 0.82) 338deg, transparent 360deg)",
@@ -1023,13 +1023,15 @@ export default function Home() {
                         "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px))",
                     }}
                   />
-                  <Image
-                    src="/images/logo/nr-power-engineering-logo-transparent.png"
-                    alt="NR Power Engineering Services"
-                    width={180}
-                    height={180}
-                    className="relative z-10 h-[52px] w-[52px] object-contain md:h-[70px] md:w-[70px]"
-                  />
+                  <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden rounded-[50%] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.2)]">
+                    <Image
+                      src="/images/logo/nr-power-engineering-logo-transparent.png"
+                      alt="NR Power Engineering Services"
+                      width={180}
+                      height={180}
+                      className="h-[48px] w-[48px] rounded-[50%] object-contain md:h-[68px] md:w-[68px]"
+                    />
+                  </div>
                 </motion.div>
                 <div className="flex min-w-0 flex-col justify-center whitespace-nowrap">
                   <motion.span
